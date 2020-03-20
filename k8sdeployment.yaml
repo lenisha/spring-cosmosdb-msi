@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cosmosmsi
+  name: cosmosmsi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cosmosmsi
+  template:
+    metadata:
+      labels:
+        app: cosmosmsi
+    spec:
+      containers:
+      - image: acraccess.azurecr.io/cosmosmsi:latest
+        name: cosmosmsi
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources: 
+          requests:
+            memory: 750Mi
+            cpu: "0.2"
+          limits:
+            memory: 750Mi
+            cpu: "0.2"  
+        env:
+        - name: spring.data.mongodb.uri
+          valueFrom:
+            secretKeyRef:
+             name: cosmosdb
+             key: spring.data.mongodb.uri
+
