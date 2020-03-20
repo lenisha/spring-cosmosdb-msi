@@ -6,8 +6,6 @@
 
 package com.msft.cosmosmsi;
 
-
-
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: cosmosmsi
+        aadpodidbinding: mongoidentity
     spec:
       containers:
       - image: acraccess.azurecr.io/cosmosmsi:latest
@@ -24,14 +25,24 @@ spec:
         resources: 
           requests:
             memory: 750Mi
-            cpu: "0.2"
+            cpu: "0.5"
           limits:
             memory: 750Mi
-            cpu: "0.2"  
-        env:
-        - name: spring.data.mongodb.uri
-          valueFrom:
-            secretKeyRef:
-             name: cosmosdb
-             key: spring.data.mongodb.uri
+            cpu: "0.5" 
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5    
+        envFrom:
+        - secretRef:
+           name: vault-connect
+            
 

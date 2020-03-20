@@ -5,16 +5,16 @@ package com.msft.cosmosmsi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+
 @SpringBootApplication
-public class CosmosMsiApplication { //} implements CommandLineRunner {
 
-	//@Autowired
-	//private CustomerRepository repository;
+public class CosmosMsiApplication {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CosmosMsiApplication.class, args);
 	}
-
 
 	/*@Override
 	public void run(String... args) throws Exception {

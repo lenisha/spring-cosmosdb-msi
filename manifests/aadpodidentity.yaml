@@ -1,0 +1,16 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: aksmongopodidentity
+spec:
+  type: 0
+  ResourceID: /subscriptions/<xxxx>/resourcegroups/aks-tests/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identity>
+  ClientID: xxxx--xxxx
+--- 
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentityBinding
+metadata:
+  name: aksmongopodidentity-binding
+spec:
+  AzureIdentity: "aksmongopodidentity"
+  Selector: "mongoidentity"
